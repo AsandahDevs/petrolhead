@@ -5,11 +5,3 @@ class german_serializer(serializers.ModelSerializer):
      class Meta:
         model = manufacturer
         fields = '__all__'
-
-     class Meta:
-        model = car_model
-        fields = '__all__'
-
-     class Meta:
-        model = segment
-        fields = '__all__'
