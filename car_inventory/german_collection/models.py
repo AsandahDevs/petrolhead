@@ -4,7 +4,8 @@ from django.db import models
 from django.db import models
 
 class manufacturer(models.Model):
-    brand = models.CharField(primary_key=True,max_length=20)
+    id = models.AutoField(primary_key=True)
+    brand = models.CharField(max_length=20,default='',editable=True)
     founder = models.TextField()
     year_founded = models.IntegerField()
     headquarters = models.TextField()
