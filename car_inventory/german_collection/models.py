@@ -1,9 +1,7 @@
-from django.db import models
-
 # Create your models here.
 from django.db import models
 
-class manufacturer(models.Model):
+class Manufacturer(models.Model):
     id = models.AutoField(primary_key=True)
     brand = models.CharField(max_length=20,default='',editable=True)
     founder = models.TextField()
@@ -13,28 +11,28 @@ class manufacturer(models.Model):
     def __str__(self) -> str:
         return f'{self.brand} {self.founder} {self.year_founded} {self.headquarters}'
 
-class car_model(models.Model):
+class CarModel(models.Model):
+    manufacturer_id = models.ForeignKey(Manufacturer,on_delete=models.RESTRICT,related_name='car_models')
     model_name = models.CharField(max_length=20)
     model_year = models.IntegerField()
-    price = models.ImageField()
+    price = models.IntegerField()
     transmission_type = models.TextField()
-    engine_position = models.TextField(blank=True)
+    engine_position = models.TextField(blank=False,default='Front')
     engine_litre = models.CharField(max_length=5)
     fuel_consumption = models.CharField(max_length=10)
     fuel_type = models.TextField()
     cylinder_layout = models.CharField(max_length=10)
-    horsepower = models.IntegerField()
+    horsepower = models.IntegerField(null=True)
     torque = models.IntegerField()
     top_speed = models.IntegerField()
     image_url = models.URLField()
-    manufacturer = models.ForeignKey(manufacturer,on_delete=models.RESTRICT)
 
     def __str__(self) -> str:
-        return f'{self.model_name} {self.model_year} {self.price} {self.transmission_type} {self.engine_position} {self.engine_litre} {self.fuel_consumption} {self.fuel_type} {self.cylinder_layout} {self.horsepower} {self.torque} {self.top_speed} {self.image_url} {self.manufacturer}'
+        return f'{self.manufacturer_id} {self.model_name} {self.model_year} {self.price} {self.transmission_type} {self.engine_position} {self.engine_litre} {self.fuel_consumption} {self.fuel_type} {self.cylinder_layout} {self.horsepower} {self.torque} {self.top_speed} {self.image_url}'
 
-class segment(models.Model):
+class Segment(models.Model):
+    car_model_id = models.ForeignKey(CarModel,on_delete=models.RESTRICT,related_name='segments')
     segment = models.TextField()
-    car_model = models.ForeignKey(car_model,on_delete=models.RESTRICT)
 
     def __str__(self) -> str:
         return self.segment
