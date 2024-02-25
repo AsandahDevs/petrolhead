@@ -2,8 +2,8 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
-from german_collection.models import manufacturer,car_model,segment
+from german_collection.models import Manufacturer,CarModel,Segment
 # Register your models here.
-admin.site.register(manufacturer)
-admin.site.register(car_model)
-admin.site.register(segment)
+admin.site.register(Manufacturer)
+admin.site.register(CarModel)
+admin.site.register(Segment)
