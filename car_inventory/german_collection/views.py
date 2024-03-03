@@ -33,3 +33,10 @@ class update_car_manufacturer_details(APIView):
             serializer.save()
             return response.Response(serializer.data, status=status.HTTP_200_OK)
         return response.Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    
+class delete_manfacturer(APIView):
+    def delete(self,request,id):
+        # deletes a manfacturer
+          car_manufacturer = Manufacturer.objects.get(pk=id)
+          car_manufacturer.delete()
+          return response.Response(status=status.HTTP_204_NO_CONTENT)
