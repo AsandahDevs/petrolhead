@@ -3,7 +3,7 @@ from rest_framework import response
 from rest_framework import status
 from rest_framework.views import APIView
 from german_collection.models import Manufacturer,CarModel,Segment
-from .serializer import ManufacturerSerializer
+from .serializer import CarModelSerializer, ManufacturerSerializer
 
 class manufacturers(APIView):
     def get(self,request:HttpRequest):
@@ -40,3 +40,12 @@ class delete_manfacturer(APIView):
           car_manufacturer = Manufacturer.objects.get(pk=id)
           car_manufacturer.delete()
           return response.Response(status=status.HTTP_204_NO_CONTENT)
+
+class manufacturer_models(APIView):
+    def get(self, request:HttpRequest):
+        try:
+         models = CarModel.objects.all()
+        except CarModel.DoesNotExist:
+         raise Http404('No Model(s) were found')
+        serializer = CarModelSerializer(models,many=True)
+        return response.Response(serializer.data,status=status.HTTP_200_OK)
