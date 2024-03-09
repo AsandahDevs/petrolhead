@@ -2,9 +2,8 @@
 from django.db import models
 
 class Manufacturer(models.Model):
-    id = models.AutoField(primary_key=True)
-    brand = models.CharField(max_length=20,default='',editable=True)
-    founder = models.TextField()
+    brand = models.CharField(max_length=20, blank=False)
+    founder = models.TextField(blank=False)
     year_founded = models.IntegerField()
     headquarters = models.TextField()
 
@@ -20,9 +19,9 @@ class CarModel(models.Model):
     engine_position = models.TextField(blank=False,default='Front')
     engine_litre = models.CharField(max_length=5)
     fuel_consumption = models.CharField(max_length=10)
-    fuel_type = models.TextField()
+    fuel_type = models.TextField(default='petrol')
     cylinder_layout = models.CharField(max_length=10)
-    horsepower = models.IntegerField(null=True)
+    horsepower = models.IntegerField()
     torque = models.IntegerField()
     top_speed = models.IntegerField()
     image_url = models.URLField()
