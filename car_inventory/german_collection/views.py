@@ -49,3 +49,12 @@ class manufacturer_models(APIView):
          raise Http404('No Model(s) were found')
         serializer = CarModelSerializer(models,many=True)
         return response.Response(serializer.data,status=status.HTTP_200_OK)
+    
+class add_model(APIView):
+    def post(self,request:HttpRequest):
+        model = CarModelSerializer(data=request.data)
+        print(model)
+        if model.is_valid():
+            model.save()
+            return response.Response(model.data,status=status.HTTP_201_CREATED)
+        return response.Response(model.data,status=status.HTTP_400_BAD_REQUEST)
