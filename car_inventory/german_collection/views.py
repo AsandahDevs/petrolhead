@@ -42,6 +42,7 @@ class delete_manfacturer(APIView):
           return response.Response(status=status.HTTP_204_NO_CONTENT)
 
 class manufacturer_models(APIView):
+    # gets a list of manufacturer models
     def get(self, request:HttpRequest):
         try:
          models = CarModel.objects.all()
@@ -50,7 +51,19 @@ class manufacturer_models(APIView):
         serializer = CarModelSerializer(models,many=True)
         return response.Response(serializer.data,status=status.HTTP_200_OK)
     
+class car_model_by_manufacturer(APIView):
+    # gets a list of manufacturer models by manufacturer id
+    def get(self, request:HttpRequest,id):
+        try:
+            model = CarModel.objects.filter(manufacturer_id=id)
+        except CarModel.DoesNotExist:
+            raise Http404('Model not found')
+        car_serializer = CarModelSerializer(model,many=True)
+        return response.Response(car_serializer.data,status=status.HTTP_200_OK)
+    
+    
 class add_model(APIView):
+    #adds new car model
     def post(self,request:HttpRequest):
         model = CarModelSerializer(data=request.data)
         print(model)
