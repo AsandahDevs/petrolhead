@@ -2,5 +2,5 @@
 
 The sole purpose of this application is to serve data about different german car manufacturers.
 
-**NB:** Please create a virtual environment before commencing work with this repository.Idealy your virtual environment should
-sit at the root level of the project directory.
+**NB:** For local development ,  please install docker desktop via https://www.docker.com/products/docker-desktop/ and run the following command after cloning the repo:
+ - docker-compose up --build
