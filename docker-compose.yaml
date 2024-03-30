@@ -5,25 +5,38 @@ services:
   db:
     image: postgres:16.2-alpine
     restart: always
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
+    container_name: postgres_db
+    env_file:
+      - car_inventory/car_inventory/.env
     environment:
         POSTGRES_PASSWORD: ${DB_PASSWORD}
         POSTGRES_USER: ${DB_USER}
         POSTGRES_DB : ${DB_NAME}
     ports:
       - "5432:5432"
-    container_name: postgres_db
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
 
   # python-api 
   backend-api:
     build: .
-    volumes:
-      - .:/app
-    ports:
-      - 8001:8001
     image: python_backend_api:petrolhead_django
     container_name: petrolhead_django
     command: gunicorn --bind 0.0.0.0:8001 car_inventory.wsgi:application
+    volumes:
+      - .:/app
     depends_on:
       - db
+      
+  #nginx web server
+  nginx:
+    image: nginx
+    restart: always
+    container_name: petrolhead_nginx
+    ports:
+      - "8080:80"
+    environment:
+    - NGINX_PORT=80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - .html/:/usr/share/nginx/html/
