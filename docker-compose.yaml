@@ -24,6 +24,6 @@ services:
       - 8001:8001
     image: python_backend_api:petrolhead_django
     container_name: petrolhead_django
-    command: python ./manage.py runserver 0.0.0.0:8001
+    command: gunicorn --bind 0.0.0.0:8001 car_inventory.wsgi:application
     depends_on:
       - db
