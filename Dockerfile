@@ -12,4 +12,4 @@ COPY . .
 
 EXPOSE 8001
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8001", "--pythonpath","/app/car_inventory", "car_inventory.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8001", "car_inventory.wsgi:application"]
