@@ -10,6 +10,11 @@ services:
       url: docker.io/asandah/car_inventory:latest
     healthCheckPath: /
     startCommand: gunicorn --bind 0.0.0.0:8001 car_inventory.wsgi:application
+    envVars:
+      - key: DATABASE_URL 
+        fromDatabase:
+          name: elephant
+          property: connectionString
 
 databases:
   - name: elephant
