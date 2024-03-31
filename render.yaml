@@ -17,7 +17,7 @@ databases:
     region: oregon
     plan: free 
     databaseName: petrol_head_db 
-    user: postgres 
+    user: asandah 
     ipAllowList: 
       - source: 0.0.0.0/0
         description: everywhere
