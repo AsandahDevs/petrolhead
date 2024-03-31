@@ -22,7 +22,7 @@ SECRET_KEY = env("SECRET_KEY")
 if env("PRODUCTION") == False:
  DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','https://petrolhead.onrender.com']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','https://car-inventory-latest.onrender.com']
 
 
 # Application definition
