@@ -5,8 +5,7 @@ services:
     name: backend-api
     plan: free
     region: oregon
-    autoDeploy: false # Disable automatic deploys
-    maxShutdownDelaySeconds: 120
+    autoDeploy: false
     image: 
       url: docker.io/asandah/car_inventory:latest
     healthCheckPath: /
