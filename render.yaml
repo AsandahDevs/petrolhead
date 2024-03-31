@@ -1,0 +1,23 @@
+services:
+ # A web service that builds from a Dockerfile
+  - type: web
+    runtime: image
+    name: backend-api
+    plan: free
+    region: oregon
+    autoDeploy: false # Disable automatic deploys
+    maxShutdownDelaySeconds: 120
+    image: 
+      url: docker.io/asandah/car_inventory:latest
+    healthCheckPath: /
+
+databases:
+  - name: elephant
+    postgresMajorVersion: "16" 
+    region: oregon
+    plan: free 
+    databaseName: petrol_head_db 
+    user: postgres 
+    ipAllowList: 
+      - source: 0.0.0.0/0
+        description: everywhere
